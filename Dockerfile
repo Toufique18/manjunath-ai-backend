@@ -15,16 +15,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY backend/requirements.txt .
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
-COPY backend/ .
-
-# Copy frontend (for static file serving if needed)
-COPY frontend/ ./frontend
+# Copy application code
+# Copying repository root into the image. Use .dockerignore to exclude large/dev files.
+COPY . .
 
 # Expose port (adjust based on your app configuration)
 EXPOSE 8000
