@@ -11,8 +11,7 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-      - .:/app
-      - ./uploads:/app/uploads
+      - /tmp/uploads:/app/uploads
     networks:
       - datanotebook-network
     restart: unless-stopped
